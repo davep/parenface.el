@@ -1,6 +1,9 @@
 ;;; parenface.el --- Provide a face for parens in lisp modes.
 ;; By Dave Pearson <davep@davep.org>
-;; $Revision: 1.1 $
+
+;; Author: Dave Pearson <davep@davep.org>
+;; Version: 1.1
+;; URL: https://github.com/davep/parenface.el
 
 ;;; Commentary:
 ;;
@@ -11,33 +14,33 @@
 
 ;;; Code:
 
-(defvar paren-face 'paren-face)
+(defvar parenface 'parenface)
 
-(defface paren-face
+(defface parenface
     '((((class color))
        (:foreground "DimGray")))
   "Face for displaying a paren."
   :group 'faces)
 
-(defmacro paren-face-add-support (keywords)
+(defmacro parenface-add-support (keywords)
   "Generate a lambda expression for use in a hook.
 
 KEYWORDS is the keywords to add paren support for."
   `(lambda ()
     (let* ((regexp "(\\|)")
            (match (assoc regexp ,keywords)))
-      (unless (eq (cdr match) paren-face)
-        (setq ,keywords (append (list (cons regexp paren-face)) ,keywords))))))
+      (unless (eq (cdr match) parenface)
+        (setq ,keywords (append (list (cons regexp parenface)) ,keywords))))))
 
 ;; Keep the compiler quiet.
 (eval-when-compile
   (defvar scheme-font-lock-keywords-2 nil)
   (defvar lisp-font-lock-keywords-2 nil))
 
-(add-hook 'scheme-mode-hook           (paren-face-add-support scheme-font-lock-keywords-2))
-(add-hook 'lisp-mode-hook             (paren-face-add-support lisp-font-lock-keywords-2))
-(add-hook 'emacs-lisp-mode-hook       (paren-face-add-support lisp-font-lock-keywords-2))
-(add-hook 'lisp-interaction-mode-hook (paren-face-add-support lisp-font-lock-keywords-2))
+(add-hook 'scheme-mode-hook           (parenface-add-support scheme-font-lock-keywords-2))
+(add-hook 'lisp-mode-hook             (parenface-add-support lisp-font-lock-keywords-2))
+(add-hook 'emacs-lisp-mode-hook       (parenface-add-support lisp-font-lock-keywords-2))
+(add-hook 'lisp-interaction-mode-hook (parenface-add-support lisp-font-lock-keywords-2))
 
 (provide 'parenface)
 
