@@ -2,10 +2,14 @@
 ;; By Dave Pearson <davep@davep.org>
 ;; $Revision: 1.1 $
 
-;; Add a paren-face to emacs and add support for it to the various lisp modes.
+;;; Commentary:
+;;
+;; Add a paren-face to Emacs and add support for it to the various Lisp modes.
 ;;
 ;; Based on some code that Boris Schaefer <boris@uncommon-sense.net> posted
 ;; to comp.lang.scheme in message <87hf8g9nw5.fsf@qiwi.uncommon-sense.net>.
+
+;;; Code:
 
 (defvar paren-face 'paren-face)
 
@@ -16,7 +20,9 @@
   :group 'faces)
 
 (defmacro paren-face-add-support (keywords)
-  "Generate a lambda expression for use in a hook."
+  "Generate a lambda expression for use in a hook.
+
+KEYWORDS is the keywords to add paren support for."
   `(lambda ()
     (let* ((regexp "(\\|)")
            (match (assoc regexp ,keywords)))
@@ -35,4 +41,4 @@
 
 (provide 'parenface)
 
-;; parenface.el ends here
+;;; parenface.el ends here
